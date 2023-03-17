@@ -56,8 +56,8 @@ namespace MultiBazou
         private void SendPostionData()
         {
             Message message = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.playerPosRot);
-            message.Add(Gameplay.i.PlayerWalking.transform.position);
-            message.Add(Gameplay.i.PlayerWalking.transform.rotation);
+            message.AddVector3(Gameplay.i.PlayerWalking.transform.position);
+            message.AddQuaternion(Gameplay.i.PlayerWalking.transform.rotation);
             ClientNetworkManager.Singleton.Client.Send(message);
         }
 

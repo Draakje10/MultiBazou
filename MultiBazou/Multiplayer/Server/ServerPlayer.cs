@@ -28,8 +28,8 @@ namespace MultiBazou
         {
             Message message = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerPosRot);
             message.Add(id);
-            message.Add(position);
-            message.Add(rotation);
+            message.AddVector3(position);
+            message.AddQuaternion(rotation);
             ServerNetworkManager.Singleton.Server.SendToAll(message);
         }
 
@@ -44,7 +44,7 @@ namespace MultiBazou
         {
             message.Add(id);
             message.Add(username);
-            message.Add(position);
+            message.AddVector3(position);
             return message;
         }
     }

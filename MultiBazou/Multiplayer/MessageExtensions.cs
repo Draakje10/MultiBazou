@@ -5,36 +5,48 @@ namespace MultiBazou
 {
     public static class MessageExtensions
     {
-        /// <summary>Adds a Vector3 to the message.</summary>
-        /// <param name="value">The Vector3 to add.</param>
-        public static void Add(this Message message, Vector3 value)
+        #region Vector3
+        /// <inheritdoc cref="AddVector3(Message, Vector3)"/>
+        /// <remarks>This method is simply an alternative way of calling <see cref="AddVector3(Message, Vector3)"/>.</remarks>
+        public static Message Add(this Message message, Vector3 value) => AddVector3(message, value);
+
+        /// <summary>Adds a <see cref="Vector3"/> to the message.</summary>
+        /// <param name="value">The <see cref="Vector3"/> to add.</param>
+        /// <returns>The message that the <see cref="Vector3"/> was added to.</returns>
+        public static Message AddVector3(this Message message, Vector3 value)
         {
-            message.Add(value.x);
-            message.Add(value.y);
-            message.Add(value.z);
+            return message.AddFloat(value.x).AddFloat(value.y).AddFloat(value.z);
         }
 
-        /// <summary>Adds a Quaternion to the message.</summary>
-        /// <param name="value">The Quaternion to add.</param>
-        public static void Add(this Message message, Quaternion value)
-        {
-            message.Add(value.x);
-            message.Add(value.y);
-            message.Add(value.z);
-            message.Add(value.w);
-        }
-
-        /// <summary>Reads a Vector3 from the message.</summary>
+        /// <summary>Retrieves a <see cref="Vector3"/> from the message.</summary>
+        /// <returns>The <see cref="Vector3"/> that was retrieved.</returns>
         public static Vector3 GetVector3(this Message message)
         {
             return new Vector3(message.GetFloat(), message.GetFloat(), message.GetFloat());
         }
+        #endregion
 
-        /// <summary>Reads a Quaternion from the message.</summary>
+        #region Quaternion
+        /// <inheritdoc cref="AddQuaternion(Message, Quaternion)"/>
+        /// <remarks>This method is simply an alternative way of calling <see cref="AddQuaternion(Message, Quaternion)"/>.</remarks>
+        public static Message Add(this Message message, Quaternion value) => AddQuaternion(message, value);
+
+        /// <summary>Adds a <see cref="Quaternion"/> to the message.</summary>
+        /// <param name="value">The <see cref="Quaternion"/> to add.</param>
+        /// <returns>The message that the <see cref="Quaternion"/> was added to.</returns>
+        public static Message AddQuaternion(this Message message, Quaternion value)
+        {
+            return message.AddFloat(value.x).AddFloat(value.y).AddFloat(value.z).AddFloat(value.w);
+        }
+
+        /// <summary>Retrieves a <see cref="Quaternion"/> from the message.</summary>
+        /// <returns>The <see cref="Quaternion"/> that was retrieved.</returns>
         public static Quaternion GetQuaternion(this Message message)
         {
             return new Quaternion(message.GetFloat(), message.GetFloat(), message.GetFloat(), message.GetFloat());
         }
+        #endregion
+
     }
 }
 
